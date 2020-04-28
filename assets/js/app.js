@@ -37,6 +37,9 @@ function addTweet(e) {
     li.appendChild(deleteButton);
     // Add tweet to li
     tweetList.appendChild(li);
+
+    //Add to local storage
+    addTweetLocalStorage(tweet);
 }
 
 function deleteTweet(e) {
@@ -45,3 +48,30 @@ function deleteTweet(e) {
         console.log(e.target.parentElement.remove())
     }
 }
+
+// Add tweet to local storage F
+
+function addTweetLocalStorage(tweet) {
+    let tweets;
+    tweets = obtainTweetsLocalStorage();
+    // Add new tweets
+    tweets.push(tweet);
+
+    // Convers string to array local storage
+    localStorage.setItem('tweets', JSON.stringify(tweets));
+}
+
+function obtainTweetsLocalStorage() {
+    let tweets;
+
+    //Search local storage values
+    if (localStorage.getItem('tweets') === null) {
+        tweets = [];
+    } else {
+        tweets = JSON.parse(localStorage.getItem('tweets'));
+    }
+    return tweets;
+}
+
+
+
